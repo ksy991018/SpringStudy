@@ -1,3 +1,3 @@
 # SpringStudy
 
-Spring Framework + Oracle DB
+Spring + Mybatis + Oracle DB
