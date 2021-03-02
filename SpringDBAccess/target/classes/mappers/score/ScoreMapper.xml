@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring.db.mybatis.score.repository.IScoreMapper">
+
+	<!-- DB컬럼명과 VO의 필드명을 맞추는 ResultMap 선언 -->
+	<resultMap id="ScoreMap"
+		type="com.spring.db.mybatis.score.model.ScoreVO">
+		<id property="stuId" column="stu_id" />
+		<result property="stuName" column="stu_name" />
+		<result property="kor" column="kor" />
+		<result property="math" column="math" />
+		<result property="eng" column="eng" />
+		<result property="total" column="total" />
+		<result property="average" column="average" />
+	</resultMap>
+
+
+	<!-- 점수 등록 기능 -->
+	<insert id="insertScore"
+		parameterType="com.spring.db.mybatis.score.model.ScoreVO">
+		INSERT INTO scores
+		VALUES (id_seq.NEXTVAL,
+		#{stuName},#{kor},#{eng},#{math},#{total},#{average})
+	</insert>
+
+	<!-- 점수 목록 조회 기능 -->
+	<select id="selectAllScores" resultMap="ScoreMap">
+		SELECT * FROM scores
+		ORDER BY stu_id ASC
+	</select>
+	
+	<!-- 점수 삭제 기능 -->
+	<delete id="deleteScore">
+		DELETE FROM scores WHERE stu_id=#{stuNum}
+	</delete>
+	
+	<!--  점수 개별 조회 -->
+	<select id="selectOne" resultMap="ScoreMap">
+		SELECT * FROM scores WHERE stu_id=#{stuNum}
+	</select>
+
+</mapper>

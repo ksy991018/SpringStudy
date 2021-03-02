@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- scope="prototype" 지정해주면 getBean할때마다 다른 객체가 생성됨. 안쓰면
+	싱글톤패턴때문에 계속 같은 객체가 생성됨 -->
+	<bean id="person" class="com.spring.basic.ex03.Person" scope="prototype">
+		<property name="name" value="홍길동"/>
+		<property name="age" value="20"/>
+	</bean>
+</beans>
