@@ -15,6 +15,23 @@
 		<result property="viewCnt" column="view_cnt" />
 	</resultMap>
 
+	<!-- 중복되는 동적 SQL문에 대한 처리 -->
+	<sql id="search">
+		<!-- 동적 SQL 구문 -->
+		<if test="condition == 'title'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'writer'">
+			WHERE writer LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'content'">
+			WHERE content LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="condition == 'titleContent'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+			OR content LIKE '%'||#{keyword}||'%' 
+		</if>
+	</sql>
 
 	<insert id="insert">
 		INSERT INTO mvc_board (board_no,title,content,writer)
@@ -28,22 +45,24 @@
 
 	<select id="getArticleList" resultMap="BoardMap">
 		SELECT * FROM
-		(
-		SELECT ROWNUM as rn, tbl.* FROM
-		(
-		SELECT * FROM mvc_board
-		ORDER BY board_no DESC
-		) tbl
-		)
-      <![CDATA[
-      WHERE rn > (#{page}-1) * #{countPerPage} 
-      AND rn <= #{page} * #{countPerPage}
-      ]]>
+			(
+			SELECT ROWNUM as rn, tbl.* FROM
+				(
+				SELECT * FROM mvc_board
+				<include refid="search"/>
+				ORDER BY board_no DESC
+				) tbl
+			)
+		<![CDATA[
+		WHERE rn > (#{page}-1) * #{countPerPage} 
+		AND rn <= #{page} * #{countPerPage}
+		]]>
 	</select>
 
 	<select id="countArticles" resultType="int">
-		SELECT COUNT(*) 
+		SELECT COUNT(*)
 		FROM mvc_board
+		<include refid="search"/>
 	</select>
 
 	<select id="getArticle" resultMap="BoardMap">
@@ -59,6 +78,7 @@
 	<delete id="delete">
 		DELETE FROM mvc_board WHERE board_no=#{boardNo}
 	</delete>
+
 
 </mapper>
 

@@ -36,14 +36,18 @@ header.masthead {
 
 					<form id="formObj" role="form" action="<c:url value='/board/delete'/>" method="post">
 					 
+					 	
+					 
 					 	<input type="hidden" name="boardNo" value="${article.boardNo}">
-
+						<input type="hidden" name="page" value="${p.page }">
+						<input type="hidden" name="countPerPage" value="${p.countPerPage }">
 						<input type="button" value="목록" class="btn" id="list-btn" 
 							style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
 						<input type="button" value="수정" class="btn"  id="modBtn"
 							style="background-color: orange; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
 						<input type="submit" value ="삭제" class="btn"  onclick="return confirm('정말로 삭제하시겠습니까?')"
 							style="background-color: red; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+					
 					</form>
 
 
@@ -67,7 +71,7 @@ header.masthead {
 			//목록버튼 클릭 이벤트 처리.
 			$("#list-btn").click(function() {
 				console.log("목록 버튼이 클릭됨!");
-				location.href="/board/list";
+				location.href="/board/list?page=${p.page}&countPerPage=${p.countPerPage}&keyword=${p.keyword}&condition=${p.condition}";
 			}); //목록버튼 처리끝.
 			
 			//변수는 let, 상수는 const로 선언
