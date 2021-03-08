@@ -1,13 +1,13 @@
 package com.spring.mvc.board.commons;
 
-public class SearchVO extends PageVO{
-
+public class SearchVO extends PageVO {
+	
 	private String keyword;
 	private String condition;
 	
 	public SearchVO() {
-		this.keyword="";
-		this.condition="";
+		this.keyword = "";
+		this.condition = "";
 	}
 	
 	
@@ -25,5 +25,6 @@ public class SearchVO extends PageVO{
 	}
 	
 	
-	
+
+
 }

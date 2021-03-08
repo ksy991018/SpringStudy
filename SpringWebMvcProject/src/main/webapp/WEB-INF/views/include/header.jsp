@@ -127,10 +127,19 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="<c:url value='/board/list' />">BOARD</a>
           </li>
-          
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#log-in">LOGIN</a>
-          </li>
+          <c:if test="${login == null}">
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#log-in">LOGIN</a>
+	          </li>
+          </c:if>
+          <c:if test="${login != null}">
+          		<li class="nav-item">
+	            	<a class="nav-link js-scroll-trigger" href="/user/logout" onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
+	        	 </li>
+	        	 <li class="nav-item">
+	            	<a class="nav-link js-scroll-trigger" href="#" >MYPAGE</a>
+	        	 </li>
+          </c:if>
           
         </ul>
       </div>

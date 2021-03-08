@@ -12,11 +12,11 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- 정적 자원(html,css,js,img)등을 uri 절대 경로로 사용하기 위한 매핑처리 -->
+	<!-- 정적 자원(html, css, js, img)등을 URI 절대 경로로 사용하기 위한 매핑 처리. -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/css/**" location="/resources/css/" />
-	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/scss/**" location="/resources/scss/" />
 	<resources mapping="/vendor/**" location="/resources/vendor/" />
 
@@ -28,6 +28,31 @@
 	
 	<context:component-scan base-package="com.spring.mvc" />
 	
+	<!-- 인터셉터를 빈으로 등록 -->
+	<beans:bean id="boardInterceptor" class="com.spring.mvc.board.commons.interceptor.BoardInterceptor" />
+	
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/board/write"/>
+			<mapping path="/board/modify"/>
+			<mapping path="/board/delete"/>
+			<beans:ref bean="boardInterceptor" />
+		</interceptor>
+	</interceptors>
+	
 	
 	
 </beans:beans>
+
+
+
+
+
+
+
+
+
+
+
+

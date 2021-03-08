@@ -3,7 +3,7 @@ package com.spring.mvc.board.model;
 import java.sql.Timestamp;
 
 public class BoardVO {
-
+	
 	private int boardNo;
 	private String title;
 	private String content;
@@ -11,12 +11,17 @@ public class BoardVO {
 	private Timestamp regDate;
 	private int viewCnt;
 	
+	//신규 게시물에 new 마크를 붙일지 말지를 결정하는 논리필드 선언.
+	private boolean newMark;
 	
-	@Override
-	public String toString() {
-		return "BoardVO [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", regDate=" + regDate + ", viewCnt=" + viewCnt + "]";
+	public boolean isNewMark() {
+		return newMark;
 	}
+	
+	public void setNewMark(boolean newMark) {
+		this.newMark = newMark;
+	}
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -53,7 +58,14 @@ public class BoardVO {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+	@Override
+	public String toString() {
+		return "BoardVO [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", regDate=" + regDate + ", viewCnt=" + viewCnt + "]";
+	}
 	
 	
 	
+	
+
 }

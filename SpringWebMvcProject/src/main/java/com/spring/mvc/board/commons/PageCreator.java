@@ -20,13 +20,13 @@ public class PageCreator {
 	//URI 파라미터를 쉽게 만들어주는 유틸 메서드 선언.
 	public String makeURI(int page) {
 		UriComponents ucp = UriComponentsBuilder.newInstance().queryParam("page", page)
-															.queryParam("countPerPage", paging.getCountPerPage())
-															.queryParam("keyword", ((SearchVO)paging).getKeyword())
-															.queryParam("condition",((SearchVO)paging).getCondition())
-															.build();
-		
-		return ucp.toUriString();							
+															  .queryParam("countPerPage", paging.getCountPerPage())
+															  .queryParam("keyword", ((SearchVO)paging).getKeyword())
+															  .queryParam("condition", ((SearchVO)paging).getCondition())
+															  .build();
+		return ucp.toUriString();
 	}
+	
 	
 	//페이징 알고리즘을 수행할 메서드 선언.
 	private void calcDataOfPage() {
@@ -99,3 +99,12 @@ public class PageCreator {
 	
 
 }
+
+
+
+
+
+
+
+
+
